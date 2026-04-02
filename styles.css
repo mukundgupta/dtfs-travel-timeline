@@ -105,6 +105,36 @@ p { color: #a1a1aa; margin-bottom: 1rem; }
 /* ── Cards ───────────────────────────────────── */
 .card-row { display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap; }
 .card { flex: 1 1 280px; background: #18181b; border: 1px solid #27272a; border-radius: 10px; padding: 1.25rem; transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s; }
+
+/* Collapsible card rows */
+.card-row.collapsible > .card:nth-child(n+4) {
+  display: none;
+}
+.collapsible-toggle { display: none; }
+.collapsible-toggle:checked ~ .card-row.collapsible > .card:nth-child(n+4) {
+  display: block;
+}
+.collapsible-toggle:checked ~ .card-row.collapsible > .card:nth-child(n+4) {
+  opacity: 1; transform: translateY(0);
+}
+
+.show-more-label {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 1rem; padding: 8px 18px;
+  font-size: 0.78rem; font-weight: 500;
+  color: #818cf8; background: rgba(129,140,248,0.08);
+  border: 1px solid rgba(129,140,248,0.2); border-radius: 8px;
+  cursor: pointer; transition: background 0.3s, border-color 0.3s;
+  -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+  user-select: none;
+}
+.show-more-label:hover { background: rgba(129,140,248,0.15); border-color: rgba(129,140,248,0.4); }
+.show-more-label .arrow { transition: transform 0.3s; display: inline-block; }
+.collapsible-toggle:checked ~ .show-more-label .arrow { transform: rotate(180deg); }
+.show-more-label .label-more { display: inline; }
+.show-more-label .label-less { display: none; }
+.collapsible-toggle:checked ~ .show-more-label .label-more { display: none; }
+.collapsible-toggle:checked ~ .show-more-label .label-less { display: inline; }
 .card:hover { border-color: #3f3f46; }
 .expandable { cursor: pointer; user-select: none; }
 .expandable:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
