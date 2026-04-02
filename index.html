@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Designing the Future of Travel</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Particle background -->
+  <canvas id="particles" aria-hidden="true"></canvas>
+
+  <!-- Scroll progress indicator -->
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <!-- Fixed vertical timeline -->
+  <nav class="timeline" aria-label="Timeline navigation">
+    <div class="timeline-line"></div>
+    <div class="timeline-line-fill"></div>
+    <button class="timeline-dot active" data-index="0" aria-label="Present Day – 2026">
+      <span class="dot-label">2026</span>
+      <span class="dot-tooltip">Present Day — Signals</span>
+    </button>
+    <button class="timeline-dot" data-index="1" aria-label="Build-up to 2030">
+      <span class="dot-label">2028</span>
+      <span class="dot-tooltip">Build-up to 2030</span>
+    </button>
+    <button class="timeline-dot black-swan-dot" data-index="2" aria-label="2030 Black Swan Event">
+      <span class="dot-label">2030</span>
+      <span class="dot-tooltip">⚡ Black Swan Event</span>
+    </button>
+    <button class="timeline-dot" data-index="3" aria-label="Post-2030 Branches">
+      <span class="dot-label">2033</span>
+      <span class="dot-tooltip">Branching Futures</span>
+    </button>
+    <button class="timeline-dot black-swan-dot" data-index="4" aria-label="2040 Black Swan Event">
+      <span class="dot-label">2040</span>
+      <span class="dot-tooltip">⚡ Black Swan Event</span>
+    </button>
+    <button class="timeline-dot" data-index="5" aria-label="2050 Outcomes">
+      <span class="dot-label">2050</span>
+      <span class="dot-tooltip">2050 Outcomes</span>
+    </button>
+  </nav>
+
+  <!-- SVG connecting lines -->
+  <svg class="connecting-lines" aria-hidden="true">
+    <defs>
+      <!-- Glow filter -->
+      <filter id="glow">
+        <feGaussianBlur stdDeviation="3" result="blur" />
+        <feMerge>
+          <feMergeNode in="blur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+      <filter id="glow-strong">
+        <feGaussianBlur stdDeviation="5" result="blur" />
+        <feMerge>
+          <feMergeNode in="blur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+      <!-- Gradients for dot-to-section lines -->
+      <linearGradient id="line-grad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#818cf8" stop-opacity="0.8" />
+        <stop offset="100%" stop-color="#818cf8" stop-opacity="0.15" />
+      </linearGradient>
+      <linearGradient id="line-grad-swan" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#f43f5e" stop-opacity="0.8" />
+        <stop offset="100%" stop-color="#f43f5e" stop-opacity="0.15" />
+      </linearGradient>
+      <!-- Vertical connector gradient -->
+      <linearGradient id="line-grad-vert" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#818cf8" stop-opacity="0.5" />
+        <stop offset="50%" stop-color="#a78bfa" stop-opacity="0.3" />
+        <stop offset="100%" stop-color="#818cf8" stop-opacity="0.5" />
+      </linearGradient>
+      <!-- Branch gradients -->
+      <linearGradient id="branch-grad-possible" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#818cf8" stop-opacity="0.6" />
+        <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.4" />
+      </linearGradient>
+      <linearGradient id="branch-grad-plausible" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#818cf8" stop-opacity="0.6" />
+        <stop offset="100%" stop-color="#a78bfa" stop-opacity="0.4" />
+      </linearGradient>
+      <linearGradient id="branch-grad-probable" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#818cf8" stop-opacity="0.6" />
+        <stop offset="100%" stop-color="#34d399" stop-opacity="0.4" />
+      </linearGradient>
+      <!-- Card connector gradient -->
+      <linearGradient id="card-conn-grad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#818cf8" stop-opacity="0.4" />
+        <stop offset="100%" stop-color="#818cf8" stop-opacity="0.15" />
+      </linearGradient>
+    </defs>
+    <!-- Groups for layering -->
+    <g class="layer-connectors"></g>
+    <g class="layer-cards"></g>
+    <g class="layer-branches"></g>
+    <g class="layer-dots"></g>
+  </svg>
+
+  <!-- Scrollable content -->
+  <main class="content">
+
+    <!-- Section 1: Present Day -->
+    <section class="section" id="section-0">
+      <!-- Floating signals -->
+      <div class="floating-signals" aria-hidden="true">
+        <span class="float-tag" style="--delay:0s; --dur:14s; --x1:-20px; --x2:30px; --y1:-15px; --y2:20px;">Autonomous Vehicles</span>
+        <span class="float-tag" style="--delay:1.5s; --dur:12s; --x1:25px; --x2:-15px; --y1:10px; --y2:-25px;">eVTOL Aircraft</span>
+        <span class="float-tag" style="--delay:3s; --dur:16s; --x1:-30px; --x2:20px; --y1:20px; --y2:-10px;">Hyperloop</span>
+        <span class="float-tag" style="--delay:0.8s; --dur:13s; --x1:15px; --x2:-25px; --y1:-20px; --y2:15px;">Digital Identity</span>
+        <span class="float-tag" style="--delay:2.2s; --dur:15s; --x1:-10px; --x2:35px; --y1:25px; --y2:-20px;">Solid-State Batteries</span>
+        <span class="float-tag" style="--delay:4s; --dur:11s; --x1:20px; --x2:-20px; --y1:-10px; --y2:30px;">Micro-Mobility</span>
+        <span class="float-tag" style="--delay:1s; --dur:17s; --x1:-25px; --x2:15px; --y1:15px; --y2:-15px;">Smart Infrastructure</span>
+        <span class="float-tag" style="--delay:3.5s; --dur:14s; --x1:30px; --x2:-10px; --y1:-25px; --y2:10px;">Carbon Credits</span>
+      </div>
+      <div class="section-inner fade-in">
+        <span class="section-tag">Signal</span>
+        <h2>Present Day — 2026</h2>
+        <p>Paragraph text explaining current text</p>
+        <div class="card-row stagger-children">
+          <div class="card expandable" tabindex="0" role="button" aria-expanded="false">
+            <h3>Signal <span class="expand-icon">+</span></h3>
+            <p>Placeholder for an emerging travel signal detected today.</p>
+            <div class="card-detail">
+              <p>Autonomous ride-hailing pilots expand to 12 new cities. Sensor costs drop 40% year-over-year, accelerating deployment timelines beyond initial forecasts.</p>
+            </div>
+          </div>
+          <div class="card expandable" tabindex="0" role="button" aria-expanded="false">
+            <h3>Trend <span class="expand-icon">+</span></h3>
+            <p>Placeholder for a macro trend shaping near-term mobility.</p>
+            <div class="card-detail">
+              <p>Electric vertical take-off aircraft complete first commercial demo flights. Three startups secure FAA certification for urban corridors.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Build-up to 2030 -->
+    <section class="section" id="section-1">
+      <div class="section-inner fade-in">
+        <span class="section-tag">Trend</span>
+        <h2>Build-up to 2030</h2>
+        <p>Governments fast-track urban air mobility regulation. Battery energy density doubles, slashing EV costs. Cross-border digital identity standards gain traction across 40+ nations.</p>
+        <div class="card-row stagger-children">
+          <div class="card expandable" tabindex="0" role="button" aria-expanded="false">
+            <h3>Trend <span class="expand-icon">+</span></h3>
+            <p>Placeholder for an accelerating trend approaching 2030.</p>
+            <div class="card-detail">
+              <p>Solid-state batteries hit mass production. Range anxiety becomes a relic as 1000 km single-charge vehicles become the norm across all price segments.</p>
+            </div>
+          </div>
+          <div class="card expandable" tabindex="0" role="button" aria-expanded="false">
+            <h3>Weak Signal <span class="expand-icon">+</span></h3>
+            <p>Placeholder for a weak signal that could amplify.</p>
+            <div class="card-detail">
+              <p>A small consortium of cities experiments with car-free downtown zones. Public approval ratings unexpectedly hit 70%, sparking national debate.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: 2030 Black Swan -->
+    <section class="section black-swan" id="section-2">
+      <div class="section-inner fade-in">
+        <span class="section-tag tag-swan">Black Swan Event</span>
+        <h2 class="swan-title">2030 — Black Swan Event</h2>
+        <p class="swan-text">A breakthrough in room-temperature superconductors collapses the cost of magnetic levitation overnight. Global freight and passenger networks face an existential pivot.</p>
+        <div class="swan-pulse" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- Section 4: Post-2030 Branches -->
+    <section class="section" id="section-3">
+      <div class="section-inner fade-in">
+        <span class="section-tag">Divergence</span>
+        <h2>Post-2030 — Branching Futures</h2>
+        <p>The superconductor shock sends travel down three divergent paths. Click a branch to explore.</p>
+
+        <div class="branches stagger-children">
+          <div class="branch branch-possible expandable" tabindex="0" role="button" aria-expanded="false">
+            <h3>Possible <span class="expand-icon">+</span></h3>
+            <p>Decentralised micro-transit pods replace buses in mid-size cities. Personal flight becomes technically feasible but socially contested.</p>
+            <div class="card-detail">
+              <p>By 2035, 200 cities operate pod networks. Noise complaints and airspace conflicts slow aerial adoption. A cultural divide emerges between "ground loyalists" and "sky commuters."</p>
+            </div>
+          </div>
+          <div class="branch branch-plausible expandable" tabindex="0" role="button" aria-expanded="false">
+            <h3>Plausible <span class="expand-icon">+</span></h3>
+            <p>Continental maglev corridors connect major hubs in under two hours. Airlines consolidate aggressively; short-haul aviation disappears.</p>
+            <div class="card-detail">
+              <p>The EU-Asia maglev link completes in 2037. Ticket prices undercut flights by 60%. Three major airlines merge into a single long-haul carrier.</p>
+            </div>
+          </div>
+          <div class="branch branch-probable expandable" tabindex="0" role="button" aria-expanded="false">
+            <h3>Probable <span class="expand-icon">+</span></h3>
+            <p>Hybrid autonomous-electric fleets dominate last-mile delivery and commuting. Regulatory lag keeps air taxis limited to premium markets.</p>
+            <div class="card-detail">
+              <p>Fleet operators replace 80% of urban delivery vans by 2036. Air taxi rides cost $200+ per trip, remaining a luxury. Regulators struggle to keep pace with ground-level autonomy.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: 2040 Black Swan -->
+    <section class="section black-swan" id="section-4">
+      <div class="section-inner fade-in">
+        <span class="section-tag tag-swan">Black Swan Event</span>
+        <h2 class="swan-title">2040 — Black Swan Event</h2>
+        <p class="swan-text">A cascading cyber-physical attack disables satellite navigation for 72 hours. Every autonomous vehicle on Earth stops simultaneously, triggering a global rethink of digital dependency in transport.</p>
+        <div class="swan-pulse" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- Section 6: 2050 Outcomes -->
+    <section class="section" id="section-5">
+      <div class="section-inner fade-in">
+        <span class="section-tag">Outcome</span>
+        <h2>2050 — Outcomes</h2>
+        <p>Travel has been reshaped by two black swans and a decade of adaptation. The world arrives at a new equilibrium.</p>
+        <div class="card-row stagger-children">
+          <div class="card expandable" tabindex="0" role="button" aria-expanded="false">
+            <h3>Outcome A <span class="expand-icon">+</span></h3>
+            <p>Placeholder for a positive long-term travel outcome.</p>
+            <div class="card-detail">
+              <p>Resilient hybrid networks blend maglev, autonomous ground fleets, and limited air corridors. Travel is faster, greener, and more equitable than ever.</p>
+            </div>
+          </div>
+          <div class="card expandable" tabindex="0" role="button" aria-expanded="false">
+            <h3>Outcome B <span class="expand-icon">+</span></h3>
+            <p>Placeholder for a cautionary long-term travel outcome.</p>
+            <div class="card-detail">
+              <p>Fragmented regulation creates a patchwork of incompatible systems. Cross-border travel becomes slower due to security checkpoints. Innovation stalls under compliance burden.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Keyboard hint -->
+  <div class="keyboard-hint" aria-hidden="true">
+    <span>↑↓ Navigate sections</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
