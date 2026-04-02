@@ -50,16 +50,23 @@ body {
 .connecting-lines path.flowing { animation: dash-flow 1.5s linear infinite; }
 
 /* ── Sections ────────────────────────────────── */
-.section { min-height: 100vh; display: flex; align-items: center; padding: 4rem 3rem 4rem 4rem; position: relative; }
-.section-inner { max-width: 680px; }
+.section { min-height: 100vh; display: flex; align-items: flex-start; padding: 4rem 3rem 4rem 4rem; position: relative; }
+.section-inner { max-width: 820px; }
 
 /* ── Fade / stagger ──────────────────────────── */
 .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
 .stagger-children > * { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
 .stagger-children.stagger-visible > *:nth-child(1) { transition-delay: 0.1s; }
-.stagger-children.stagger-visible > *:nth-child(2) { transition-delay: 0.25s; }
-.stagger-children.stagger-visible > *:nth-child(3) { transition-delay: 0.4s; }
+.stagger-children.stagger-visible > *:nth-child(2) { transition-delay: 0.2s; }
+.stagger-children.stagger-visible > *:nth-child(3) { transition-delay: 0.3s; }
+.stagger-children.stagger-visible > *:nth-child(4) { transition-delay: 0.4s; }
+.stagger-children.stagger-visible > *:nth-child(5) { transition-delay: 0.5s; }
+.stagger-children.stagger-visible > *:nth-child(6) { transition-delay: 0.55s; }
+.stagger-children.stagger-visible > *:nth-child(7) { transition-delay: 0.6s; }
+.stagger-children.stagger-visible > *:nth-child(8) { transition-delay: 0.65s; }
+.stagger-children.stagger-visible > *:nth-child(9) { transition-delay: 0.7s; }
+.stagger-children.stagger-visible > *:nth-child(10) { transition-delay: 0.75s; }
 .stagger-children.stagger-visible > * { opacity: 1; transform: translateY(0); }
 
 /* ── Floating signals ────────────────────────── */
@@ -96,8 +103,8 @@ h3 { font-size: 1rem; font-weight: 600; color: #e4e4e7; margin-bottom: 0.4rem; }
 p { color: #a1a1aa; margin-bottom: 1rem; }
 
 /* ── Cards ───────────────────────────────────── */
-.card-row { display: flex; gap: 1rem; margin-top: 1rem; }
-.card { flex: 1; background: #18181b; border: 1px solid #27272a; border-radius: 10px; padding: 1.25rem; transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s; }
+.card-row { display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap; }
+.card { flex: 1 1 280px; background: #18181b; border: 1px solid #27272a; border-radius: 10px; padding: 1.25rem; transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s; }
 .card:hover { border-color: #3f3f46; }
 .expandable { cursor: pointer; user-select: none; }
 .expandable:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
